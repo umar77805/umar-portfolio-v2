@@ -20,6 +20,7 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
   const menuItems = [
     { title: "Home", target: "hero" },
     { title: "About", target: "about" },
+    { title: "Showcases", target: "showcases" },
   ];
   return (
     <>
@@ -40,14 +41,20 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
           SDE
         </Text>
       </Flex>
-      <Drawer.Root placement={{ md: "start", mdDown: "top" }} size="full">
+      <Drawer.Root
+        placement={{ md: "start", mdDown: "top" }}
+        size="full"
+        trapFocus={false}
+      >
         <Drawer.Trigger>
           <Icon size="lg" cursor="pointer">
             <GiHamburgerMenu />
           </Icon>
           <Portal>
             <Drawer.Backdrop />
-            <Drawer.Positioner>
+            <Drawer.Positioner
+              padding={{ md: "0 0 0 100px", mdDown: "100px 0 0 0" }}
+            >
               <Drawer.Content>
                 <Drawer.Header>
                   <Drawer.Title as="h2" fontSize="xx-large">
@@ -64,13 +71,18 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
                 >
                   <VStack>
                     <For each={menuItems}>
-                      {({ title, target }) => (
+                      {({ title, target }, idx) => (
                         <Link
                           href={`#${target}`}
-                          fontSize="3xl"
+                          fontSize="4xl"
+                          lineHeight="3rem"
                           fontWeight="med"
                           margin="10px 0"
                           _active={{ textDecoration: "none" }}
+                          _focus={{ boxShadow: "none", outline: "none" }}
+                          data-aos="fade-up"
+                          data-aos-duration="400"
+                          key={idx}
                         >
                           {title}
                         </Link>

@@ -1,6 +1,7 @@
 import { Flex, Heading, Icon } from "@chakra-ui/react";
 import ExperienceCard from "./ExperienceCard";
 import { MdHorizontalRule } from "react-icons/md";
+import { Fragment } from "react/jsx-runtime";
 
 export interface Experience {
   start: {
@@ -70,13 +71,13 @@ const Experience = () => {
       <Icon>
         <MdHorizontalRule />
       </Icon>
-      {allExperiences.map((experience) => (
-        <>
+      {allExperiences.map((experience, idx) => (
+        <Fragment key={idx}>
           <ExperienceCard {...experience} />
           <Icon marginTop={2}>
             <MdHorizontalRule />
           </Icon>
-        </>
+        </Fragment>
       ))}
     </Flex>
   );

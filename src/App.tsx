@@ -4,10 +4,11 @@ import { ColorModeButton } from "./components/ui/color-mode";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Quote from "./components/Quote";
+import Showcases from "./components/Showcases";
 
 function App() {
   return (
-    <Box minHeight="500vh" maxWidth="100vw">
+    <Box maxWidth="100vw">
       <Navbar />
       <ColorModeButton
         position="fixed"
@@ -22,6 +23,7 @@ function App() {
       <Hero />
       <About />
       <Quote />
+      <Showcases />
     </Box>
   );
 }

@@ -29,10 +29,10 @@ const Hero = () => {
           objectFit="cover"
           objectPosition={{ md: "top" }}
           zIndex={0}
-          filter={{ mdDown: "blur(2px)" }}
+          filter={{ mdDown: "blur(2px) brightness(120%)" }}
         />
       </Box>
-      <Link href="#about">
+      <Link href="#about" _focus={{ boxShadow: "none", outline: "none" }}>
         <Icon
           position="absolute"
           bottom="10vh"

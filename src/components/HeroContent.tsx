@@ -10,7 +10,11 @@ const HeroContent = () => {
       // alignItems="center"
       maxWidth={{ md: "25vw" }}
       padding={{ mdDown: "5" }}
-      backgroundColor={{ mdDown: "whiteAlpha.800" }}
+      backgroundColor={{
+        mdDown: { _dark: "blackAlpha.800", _light: "whiteAlpha.800" },
+      }}
+      marginX={{ mdDown: "5" }}
+      borderRadius={{ mdDown: "10px" }}
     >
       <Heading
         as="h2"
@@ -18,11 +22,11 @@ const HeroContent = () => {
         lineHeight="1em"
         fontWeight="light"
         marginBottom={5}
-        color={{ md: { _dark: "white", _light: "black" }, mdDown: "black" }}
+        // color={{ md: { _dark: "white", _light: "black" }, mdDown: "black" }}
       >
         Lovely to have you here! I am Umar Ahmed
       </Heading>
-      <Text color={{ md: "gray", mdDown: "black" }} marginBottom={5}>
+      <Text marginBottom={5}>
         I am a Software Developer based in India. Currently working at Lentra AI
         as an <strong>Associate - Fullstack Developer</strong>
       </Text>
