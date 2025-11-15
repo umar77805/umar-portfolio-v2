@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdHorizontalRule } from "react-icons/md";
+import Logo from "./Logo";
 
 interface Props {
   nameRotate?: boolean;
@@ -21,10 +22,11 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
     { title: "Home", target: "hero" },
     { title: "About", target: "about" },
     { title: "Showcases", target: "showcases" },
+    { title: "Footer", target: "footer" },
   ];
   return (
     <>
-      <Text>Logo</Text>
+      <Logo />
       <Flex
         transform={nameRotate ? "rotate(-90deg)" : ""}
         alignItems="center"

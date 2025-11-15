@@ -1,14 +1,4 @@
-@font-face {
-  font-family: "ZSansFont";
-  src: url("./assets/fonts/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Regular.ttf")
-    format(".ttf");
-}
-
-@font-face {
-  font-family: "VSansFont";
-  src: url("./assets/fonts/Vend_Sans/static/VendSans-Regular.ttf")
-    format(".ttf");
-}
+/* Styles used before react loads */
 
 #spinner {
   position: fixed;

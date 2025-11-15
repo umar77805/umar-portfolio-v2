@@ -2,6 +2,7 @@ import { Flex } from "@chakra-ui/react";
 import GameDiscoveryHome from "../assets/game_disovery_home.png";
 import PortfolioV1Home from "../assets/umar_portfolio_v1_home.png";
 import ShowcaseContent from "./ShowcaseContent";
+import { Fragment } from "react";
 
 const Showcases = () => {
   const showCaseInfo = [
@@ -53,9 +54,8 @@ const Showcases = () => {
       {showCaseInfo.map((info, idx) => {
         const { desc, image, links, title } = info;
         return (
-          <>
+          <Fragment key={idx}>
             <ShowcaseContent
-              key={idx}
               desc={desc}
               image={image}
               title={title}
@@ -70,7 +70,7 @@ const Showcases = () => {
                 }}
               />
             )}
-          </>
+          </Fragment>
         );
       })}
     </Flex>

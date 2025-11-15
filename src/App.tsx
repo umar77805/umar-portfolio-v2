@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import About from "./components/About";
 import Quote from "./components/Quote";
 import Showcases from "./components/Showcases";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <About />
       <Quote />
       <Showcases />
+      <Footer />
     </Box>
   );
 }

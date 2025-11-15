@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Icon, Image, Link, Text } from "@chakra-ui/react";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { MdHorizontalRule } from "react-icons/md";
 
 interface Link {
@@ -58,9 +58,8 @@ const ShowcaseContent = ({ image, desc, title, flipped, links }: Props) => {
           )}
         </Box>
         {links?.map((linkObj, idx) => (
-          <>
+          <Fragment key={idx}>
             <Link
-              key={idx}
               href={linkObj.target}
               fontSize="sm"
               color="#DA6A52"
@@ -74,7 +73,7 @@ const ShowcaseContent = ({ image, desc, title, flipped, links }: Props) => {
             <Icon transform="rotate(90deg)" margin="0 1" color="gray">
               <MdHorizontalRule />
             </Icon>
-          </>
+          </Fragment>
         ))}
       </Box>
     </Flex>
