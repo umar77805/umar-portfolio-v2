@@ -1,54 +1,55 @@
-import { Flex, Heading, Icon } from "@chakra-ui/react";
+import { Flex, Heading, Icon, Spinner } from "@chakra-ui/react";
 import ExperienceCard from "./ExperienceCard";
 import { MdHorizontalRule } from "react-icons/md";
 import { Fragment } from "react/jsx-runtime";
+import useExperiences from "../utils/hooks/useExperiences";
+import { type ValidExperience } from "./ExperienceCard";
 
-export interface Experience {
-  start: {
-    year: number;
-    month: string;
-  };
-  end: {
-    year: number | null;
-    month: string | null;
-  };
-  isCurrent: boolean;
-  position: string;
+interface DbExperience {
   company: string;
-  desc: string;
+  description: string[];
+  end_date: string | null;
+  id: string;
+  is_current: boolean;
+  start_date: string;
+  title: string;
 }
 
+const convertExperience = ({
+  company,
+  description: desc,
+  end_date,
+  start_date,
+  id,
+  is_current: isCurrent,
+  title: position,
+}: DbExperience): ValidExperience => {
+  const startInDateFormat = new Date(start_date);
+  const endInDateFormat = end_date ? new Date(end_date) : null;
+
+  return {
+    company,
+    desc,
+    isCurrent,
+    id,
+    position,
+    start: {
+      month: startInDateFormat.toLocaleString("default", { month: "short" }),
+      year: startInDateFormat.getFullYear(),
+    },
+    end: {
+      month: endInDateFormat
+        ? endInDateFormat.toLocaleString("default", { month: "short" })
+        : "",
+      year: endInDateFormat ? endInDateFormat.getFullYear() : null,
+    },
+  };
+};
+
 const Experience = () => {
-  const allExperiences: Experience[] = [
-    {
-      start: {
-        year: 2023,
-        month: "Oct",
-      },
-      end: {
-        year: null,
-        month: null,
-      },
-      isCurrent: true,
-      position: "Associate - Fullstack Developer",
-      company: "Lentra AI",
-      desc: "Developed and maintained core fintech platforms, working across the full stack to build performant and reliable systems. Partnered with clients and cross-functional teams to translate business requirements into robust technical solutions. Contributed to architecture design, implementation, and documentation of key product modules, helping deliver high-quality releases in a fast-paced environment.",
-    },
-    {
-      start: {
-        year: 2023,
-        month: "May",
-      },
-      end: {
-        year: 2023,
-        month: "Sept",
-      },
-      isCurrent: false,
-      position: "Software Development Intern",
-      company: "Lentra AI",
-      desc: "Built and deployed a full-stack analytical B2B application for a banking client, designed to process and analyze large-scale loan applicant data. Implemented dynamic data visualizations to highlight key drop-off points in the loan application workflow, enabling business teams to identify and address process inefficiencies. The solution provided the bank with critical, data-driven insights to optimize customer acquisition and conversion rates.",
-    },
-  ];
+  const { data: allExperiences, isLoading } = useExperiences();
+
+  if (isLoading) return <Spinner />;
   return (
     <Flex
       direction="column"
@@ -71,14 +72,23 @@ const Experience = () => {
       <Icon>
         <MdHorizontalRule />
       </Icon>
-      {allExperiences.map((experience, idx) => (
-        <Fragment key={idx}>
-          <ExperienceCard {...experience} />
-          <Icon marginTop={2}>
-            <MdHorizontalRule />
-          </Icon>
-        </Fragment>
-      ))}
+      {allExperiences &&
+        allExperiences.length &&
+        allExperiences
+          .sort((a, b) => {
+            return (
+              new Date(b.start_date).getTime() -
+              new Date(a.start_date).getTime()
+            );
+          })
+          .map((experience) => (
+            <Fragment key={experience.id}>
+              <ExperienceCard {...convertExperience(experience)} />
+              <Icon marginTop={2}>
+                <MdHorizontalRule />
+              </Icon>
+            </Fragment>
+          ))}
     </Flex>
   );
 };

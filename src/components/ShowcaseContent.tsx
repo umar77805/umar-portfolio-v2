@@ -1,18 +1,13 @@
 import { Box, Flex, Heading, Icon, Image, Link, Text } from "@chakra-ui/react";
-import { Fragment, type ReactNode } from "react";
+import { Fragment } from "react";
 import { MdHorizontalRule } from "react-icons/md";
-
-interface Link {
-  linkDesc: string;
-  target: string;
-  icon?: ReactNode;
-}
+import type { ProjectLink } from "../../database.types";
 
 interface Props {
   image: string;
   title: string;
   desc: string | string[];
-  links?: Link[];
+  links: ProjectLink[] | null;
   flipped?: boolean;
 }
 
@@ -47,7 +42,7 @@ const ShowcaseContent = ({ image, desc, title, flipped, links }: Props) => {
         >
           {Array.isArray(desc) ? (
             desc.map((para, idx) => (
-              <Text key={idx} marginTop={5} fontSize="sm" color="gray">
+              <Text key={idx} marginTop={2} fontSize="sm" color="gray">
                 {para}
               </Text>
             ))
@@ -68,7 +63,6 @@ const ShowcaseContent = ({ image, desc, title, flipped, links }: Props) => {
               textDecoration="underline dashed"
             >
               {linkObj.linkDesc}
-              {linkObj.icon || ""}
             </Link>
             <Icon transform="rotate(90deg)" margin="0 1" color="gray">
               <MdHorizontalRule />

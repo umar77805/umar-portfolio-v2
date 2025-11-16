@@ -8,22 +8,21 @@ import {
   VStack,
   For,
   Link,
+  Spinner,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdHorizontalRule } from "react-icons/md";
 import Logo from "./Logo";
+import useGlobal from "../utils/hooks/useGlobal";
 
 interface Props {
   nameRotate?: boolean;
 }
 
 const NavbarContent = ({ nameRotate = true }: Props) => {
-  const menuItems = [
-    { title: "Home", target: "hero" },
-    { title: "About", target: "about" },
-    { title: "Showcases", target: "showcases" },
-    { title: "Footer", target: "footer" },
-  ];
+  const { data, isLoading } = useGlobal();
+
+  if (isLoading) return <Spinner />;
   return (
     <>
       <Logo />
@@ -33,14 +32,14 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
         flexDirection="column"
       >
         <Text whiteSpace="nowrap" transformOrigin="center" fontWeight="bold">
-          MD Umar Ahmed
+          {data?.name}
         </Text>
         <Icon>
           <MdHorizontalRule />
         </Icon>
         {/* <hr style={{ width: "100%" }} /> */}
         <Text fontSize="sm" color="gray">
-          SDE
+          {data?.current_position}
         </Text>
       </Flex>
       <Drawer.Root
@@ -71,22 +70,26 @@ const NavbarContent = ({ nameRotate = true }: Props) => {
                   marginLeft={{ md: "30vw" }}
                   alignItems="center"
                 >
-                  <VStack>
-                    <For each={menuItems}>
-                      {({ title, target }, idx) => (
+                  <VStack
+                    display="flex"
+                    direction="column"
+                    alignItems="flex-start"
+                  >
+                    <For each={data?.sections}>
+                      {({ name, target_id, id }) => (
                         <Link
-                          href={`#${target}`}
+                          href={`#${target_id}`}
                           fontSize="4xl"
-                          lineHeight="3rem"
+                          lineHeight="4rem"
                           fontWeight="med"
                           margin="10px 0"
                           _active={{ textDecoration: "none" }}
                           _focus={{ boxShadow: "none", outline: "none" }}
                           data-aos="fade-up"
                           data-aos-duration="400"
-                          key={idx}
+                          key={id}
                         >
-                          {title}
+                          {name}
                         </Link>
                       )}
                     </For>

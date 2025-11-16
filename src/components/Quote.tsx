@@ -1,7 +1,10 @@
-import { Flex, Icon, Text } from "@chakra-ui/react";
+import { Flex, Icon, SkeletonText, Text } from "@chakra-ui/react";
 import { FaQuoteLeft } from "react-icons/fa";
+import useQuote from "../utils/hooks/useQuote";
 
 const Quote = () => {
+  const { data, isLoading } = useQuote();
+
   return (
     <Flex
       justifyContent={{ mdDown: "center" }}
@@ -12,22 +15,31 @@ const Quote = () => {
       backgroundColor="#e68570ff"
       id="quote"
     >
-      <Text
-        width="70%"
-        paddingLeft={{ md: "20%" }}
-        color="white"
-        _dark={{ color: "white" }}
-        fontSize={{ md: "medium", mdDown: "sm" }}
-      >
-        <Icon marginRight={10} size="2xl">
-          <FaQuoteLeft />
-        </Icon>
-        Working on core fintech products has given me a deep appreciation for
-        the craft of building impactful software. I’ve collaborated closely with
-        clients to design and deliver solutions that address complex challenges,
-        while ensuring quality, scalability, and clarity through well-maintained
-        documentation
-      </Text>
+      {isLoading ? (
+        <SkeletonText
+          marginLeft={{ md: "20%" }}
+          variant="shine"
+          width="50%"
+          height="5"
+          css={{
+            "--start-color": "colors.whiteAlpha.200",
+            "--end-color": "colors.whiteAlpha.700",
+          }}
+        />
+      ) : (
+        <Text
+          width="70%"
+          paddingLeft={{ md: "20%" }}
+          color="white"
+          _dark={{ color: "white" }}
+          fontSize={{ md: "medium", mdDown: "sm" }}
+        >
+          <Icon marginRight={10} size="2xl">
+            <FaQuoteLeft />
+          </Icon>
+          {data?.text || ""}
+        </Text>
+      )}
     </Flex>
   );
 };

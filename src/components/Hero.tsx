@@ -1,9 +1,18 @@
-import { Image, Flex, Icon, SimpleGrid, Link, Box } from "@chakra-ui/react";
+import {
+  Image,
+  Flex,
+  Icon,
+  SimpleGrid,
+  Link,
+  Box,
+  Spinner,
+} from "@chakra-ui/react";
 import { BsArrowDown } from "react-icons/bs";
 import HeroContent from "./HeroContent";
-import ProfilePic from "../assets/profile.jpeg";
+import useHero from "../utils/hooks/useHero";
 
 const Hero = () => {
+  const { data, isLoading } = useHero();
   return (
     <SimpleGrid
       columns={{ mdDown: 1, md: 2 }}
@@ -19,33 +28,52 @@ const Hero = () => {
         top={{ mdDown: "35%" }}
         zIndex={1}
       >
-        <HeroContent />
+        <HeroContent
+          company_logo={data?.company_logo || ""}
+          name={data?.name || ""}
+          subtitle={data?.subtitle || ""}
+          isLoading={isLoading}
+        />
       </Flex>
       <Box maxHeight="100vh">
-        <Image
-          height="100%"
-          width="100%"
-          src={ProfilePic}
-          objectFit="cover"
-          objectPosition={{ md: "top" }}
-          zIndex={0}
-          // filter={{ mdDown: "blur(2px) brightness(120%)" }}
-        />
+        {isLoading ? (
+          <Flex
+            width="100%"
+            height={{ md: "100%", mdDown: "100vh" }}
+            as="div"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Spinner />
+          </Flex>
+        ) : (
+          <Image
+            height="100%"
+            width="100%"
+            src={data?.profile_image || ""}
+            objectFit="cover"
+            objectPosition={{ md: "top" }}
+            zIndex={0}
+          />
+        )}
       </Box>
-      <Link href="#about" _focus={{ boxShadow: "none", outline: "none" }}>
-        <Icon
-          position="absolute"
-          bottom="10vh"
-          left="40%"
-          cursor="pointer"
-          background="#DA6A52"
-          boxShadow="0 5px 20px grey"
-          padding="10px"
-          zIndex={5}
-        >
-          <BsArrowDown size="50px" color="white" />
-        </Icon>
-      </Link>
+      {!isLoading && (
+        <Link href="#about" _focus={{ boxShadow: "none", outline: "none" }}>
+          <Icon
+            position="absolute"
+            bottom="10vh"
+            left="40%"
+            cursor="pointer"
+            background="#DA6A52"
+            boxShadow="0 5px 20px grey"
+            padding="10px"
+            zIndex={5}
+          >
+            <BsArrowDown size="50px" color="white" />
+          </Icon>
+        </Link>
+      )}
     </SimpleGrid>
   );
 };

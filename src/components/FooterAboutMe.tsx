@@ -1,19 +1,25 @@
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import useGlobal from "../utils/hooks/useGlobal";
 
 const FooterAboutMe = () => {
+  const { data, isLoading } = useGlobal();
+
   return (
     <Flex direction="column" color="white">
       <Heading as="h3">About</Heading>
-      <Text color="gray" fontSize="sm" marginTop={2}>
-        A Software Developer based in India. Currently working at Lentra AI as
-        an Associate - Fullstack Developer
-      </Text>
+      {isLoading ? (
+        <Spinner marginTop={4} />
+      ) : (
+        <Text color="gray" fontSize="sm" marginTop={2}>
+          {data?.footer_about}
+        </Text>
+      )}
       <Text
         fontFamily="Mea Culpa"
         marginTop={1}
         fontSize={{ md: "4xl", mdDown: "2xl" }}
       >
-        Umar Ahmed
+        {data?.name}
       </Text>
     </Flex>
   );
