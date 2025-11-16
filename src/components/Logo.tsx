@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import useGlobal from "../utils/hooks/useGlobal";
 
 const Logo = () => {
@@ -24,8 +24,6 @@ const Logo = () => {
 
   return (
     <Flex
-      as="a"
-      href="#hero" //TS error is not fixable at the moment. No issues at UI end
       width="50px"
       aspectRatio={1}
       borderRadius="50%"
@@ -33,9 +31,11 @@ const Logo = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Text fontFamily="Fascinate Inline" color="white" fontSize="lg">
-        {getShortName()}
-      </Text>
+      <Link href="#hero">
+        <Text fontFamily="Fascinate Inline" color="white" fontSize="lg">
+          {getShortName()}
+        </Text>
+      </Link>
     </Flex>
   );
 };
