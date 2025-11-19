@@ -18,7 +18,6 @@ const About = () => {
       >
         <AboutMe />
         <Experience />
-        {/* <Box data-aos="fade-left">About</Box> */}
       </SimpleGrid>
     </Flex>
   );

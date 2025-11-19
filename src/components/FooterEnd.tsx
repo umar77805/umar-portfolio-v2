@@ -1,15 +1,29 @@
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, HStack, Icon, Spinner, Text } from "@chakra-ui/react";
 import useGlobal from "../utils/hooks/useGlobal";
+import { FaRegCopyright } from "react-icons/fa";
 
 const FooterEnd = () => {
   const { data, isLoading } = useGlobal();
 
-  if (isLoading) return <Spinner marginLeft={10} />;
+  if (isLoading) return <Spinner />;
 
   return (
-    <Flex marginLeft={5}>
+    <Flex
+      paddingY={5}
+      paddingX={20}
+      justifyContent="space-between"
+      width="100%"
+    >
+      <HStack>
+        <Icon color="white" size="xs">
+          <FaRegCopyright />
+        </Icon>
+        <Text color="gray" fontSize="xs">
+          {data?.final_statement}
+        </Text>
+      </HStack>
       <Text color="gray" fontSize="xs">
-        {data?.final_statement}
+        v{import.meta.env.VITE_REACT_APP_VERSION}
       </Text>
     </Flex>
   );
