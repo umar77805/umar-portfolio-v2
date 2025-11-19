@@ -10,8 +10,11 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import useGlobal from "../utils/hooks/useGlobal";
 import VersionInfo from "./VersionInfo";
+import { useState } from "react";
+import { IoMdClose } from "react-icons/io";
 
 const NavbarOpenContent = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const { data } = useGlobal();
 
   return (
@@ -19,10 +22,11 @@ const NavbarOpenContent = () => {
       placement={{ md: "start", mdDown: "top" }}
       size="full"
       trapFocus={false}
+      onOpenChange={(changeInfo) => setIsOpen(changeInfo.open)}
     >
       <Drawer.Trigger>
         <Icon size="lg" cursor="pointer">
-          <GiHamburgerMenu />
+          {isOpen ? <IoMdClose /> : <GiHamburgerMenu />}
         </Icon>
         <Portal>
           <Drawer.Backdrop />
