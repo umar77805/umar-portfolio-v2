@@ -2,6 +2,7 @@ import { Flex, Heading, Icon, Spinner, Text } from "@chakra-ui/react";
 import { FaLocationArrow } from "react-icons/fa";
 import { Tooltip } from "./ui/tooltip";
 import useAboutMe from "../utils/hooks/useAboutMe";
+import { Link } from "react-router";
 
 const AboutMe = () => {
   const { data, isLoading } = useAboutMe();
@@ -24,21 +25,23 @@ const AboutMe = () => {
           data-aos-delay="0"
         >
           About Me
-          <Icon
-            marginLeft={2}
-            color="grey"
-            cursor="pointer"
-            transition="0.2s"
-            width="2rem"
-            _hover={{
-              marginLeft: "3",
-              scale: 1.2,
-              color: "#DA6A52",
-              transition: "0.2s ease-in",
-            }}
-          >
-            <FaLocationArrow size="1rem" />
-          </Icon>
+          <Link to="/aboutMe">
+            <Icon
+              marginLeft={2}
+              color="grey"
+              cursor="pointer"
+              transition="0.2s"
+              width="2rem"
+              _hover={{
+                marginLeft: "3",
+                scale: 1.2,
+                color: "#DA6A52",
+                transition: "0.2s ease-in",
+              }}
+            >
+              <FaLocationArrow size="1rem" />
+            </Icon>
+          </Link>
         </Heading>
       </Tooltip>
       {data?.paragraphs.map((para, idx) => (

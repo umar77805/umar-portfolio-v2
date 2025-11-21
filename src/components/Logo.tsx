@@ -1,5 +1,6 @@
-import { Flex, Link, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import useGlobal from "../utils/hooks/useGlobal";
+import { Link } from "react-router";
 
 const Logo = () => {
   const { data } = useGlobal();
@@ -31,7 +32,7 @@ const Logo = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Link href="#hero">
+      <Link to="/">
         <Text fontFamily="Fascinate Inline" color="white" fontSize="lg">
           {getShortName()}
         </Text>

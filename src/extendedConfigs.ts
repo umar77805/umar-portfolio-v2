@@ -4,6 +4,7 @@ import { createSystem, defaultConfig, defineConfig } from '@chakra-ui/react';
 import "@fontsource-variable/vend-sans/index.css"
 import "@fontsource/mea-culpa/index.css"
 import "@fontsource/fascinate-inline/index.css"
+import '@fontsource/black-ops-one/index.css';
 
 const theme = {
   tokens: {
@@ -21,7 +22,10 @@ const globalCss = {
     scrollBehavior: "smooth",
     marginLeft: { md: "100px", mdDown: "0" },
     marginTop: { mdDown: "100px", md: "0" },
-    overflowX: "hidden"
+    overflowX: "hidden",
+  },
+  img: {
+    draggable: false
   }
 }
 

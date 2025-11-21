@@ -2,10 +2,10 @@ import { chakra } from "@chakra-ui/react";
 
 const Hr = chakra("hr", {
   base: {
-    border: "none",
-    borderBottom: "1px solid",
-    borderColor: "gray",
-    my: 5,
+    padding: "0",
+    margin: "0",
+    // backgroundColor: { _light: "1px solid black", _dark: "1px solid white" },
+    width: "100%",
   },
 });
 

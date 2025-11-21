@@ -10,12 +10,33 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import useGlobal from "../utils/hooks/useGlobal";
 import VersionInfo from "./VersionInfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useLocation } from "react-router";
 
 const NavbarOpenContent = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data } = useGlobal();
+
+  const homePageNavs = data?.sections.filter(
+    (section) => section.relevent_page === "home"
+  );
+  const aboutPageNavs = data?.sections.filter(
+    (section) => section.relevent_page === "about"
+  );
+
+  const { pathname } = useLocation();
+
+  const navs =
+    pathname === "/"
+      ? homePageNavs
+      : pathname === "/aboutMe"
+      ? aboutPageNavs
+      : [];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Drawer.Root
@@ -52,7 +73,7 @@ const NavbarOpenContent = () => {
                   direction="column"
                   alignItems="flex-start"
                 >
-                  <For each={data?.sections}>
+                  <For each={navs}>
                     {({ name, target_id, id }) => (
                       <Link
                         href={`#${target_id}`}

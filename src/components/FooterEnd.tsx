@@ -10,7 +10,7 @@ const FooterEnd = () => {
   return (
     <Flex
       paddingY={5}
-      paddingX={20}
+      paddingX={{md: 20, mdDown: 10}}
       justifyContent="space-between"
       width="100%"
     >
