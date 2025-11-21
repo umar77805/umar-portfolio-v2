@@ -1,7 +1,11 @@
 import { Box, Flex, Heading, Icon, Image, Link, Text } from "@chakra-ui/react";
 import { Fragment } from "react";
 import { MdHorizontalRule } from "react-icons/md";
-import type { ProjectLink } from "../../database.types";
+
+export interface ProjectLink {
+  target: string;
+  linkDesc: string;
+}
 
 interface Props {
   image: string;
