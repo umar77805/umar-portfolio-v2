@@ -18,7 +18,7 @@ const AboutMe = () => {
       <Heading
         as="h1"
         fontFamily="Black Ops One"
-        fontSize="7xl"
+        fontSize={{ md: "7xl", mdDown: "5xl" }}
         marginY={10}
         color="#DA6A52"
       >
